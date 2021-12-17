@@ -1,4 +1,3 @@
-
 variable "pgp_key" {
   type = string
 }
@@ -11,6 +10,14 @@ module "admin" {
   create_iam_user_login_profile = false
   create_iam_access_key         = true
   pgp_key                       = var.pgp_key
+}
+
+output "admin_id" {
+  value = module.admin.iam_access_key_id
+}
+
+output "admin_encrypted_key" {
+  value = module.admin.iam_access_key_encrypted_secret
 }
 
 module "iam_group_superadmins" {
